@@ -35,7 +35,7 @@ function parse(dirname) {
                         pins: pins
                     }
                 });
-                fs.writeFileSync(path.join(DEST, item), JSON.stringify(boards));
+                fs.writeFileSync(path.join(DEST, item), JSON.stringify({ status:0, data: boards}));
             } catch(e){
                 console.error('require file:', filepath, e);
             }
@@ -73,7 +73,7 @@ function parseBoards(dirpath, dirname) {
                                 src: d.file.key + '_fw236'
                             };
                         });
-                        fs.writeFileSync(path.join(destPath, pin), JSON.stringify(dataPins));
+                        fs.writeFileSync(path.join(destPath, pin), JSON.stringify({ status: 0, data: dataPins }));
                     } catch(e) {
                         console.error('require file:', filep, e);
                     }
