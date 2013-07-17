@@ -41,6 +41,8 @@ function parse(dirname) {
             }
         } else if (item === 'boards') {
             parseBoards(filepath, item);
+        } else {
+            console.error('Unknow file:', filepath);
         }
     });
 }

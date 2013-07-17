@@ -3,7 +3,7 @@ var http = require('http'),
     path = require('path'),
     fs = require('fs');
 
-var code = 'hil0k7m9',
+var code = 'hitwq5yj',
     codeList = '0123456789abcdefghijklmnopqrstuvwxyz',
     param = { limit: 20, wfl: 1};
 
@@ -43,7 +43,7 @@ function run(count, uri, dir, filterName, callback) {
                 "Connection": "keep-alive",
                 "Accept-Encoding": "gzip,deflate,sdch",
                 "Accept-Language": "zh-CN,zh;q=0.8",
-                "Cookie": '_hb_chrome_extention=true; sid=vi5vuZy5zmidmRTC05uq9gfS.%2BcHeDWPsJig3qEVsAlFk2pATOi9p2fo%2BA3h4IO9y%2BgM; __utma=170314297.1433670659.1372335136.1372335136.1372345361.2; __utmb=170314297.9.10.1372345361; __utmc=170314297; __utmz=170314297.1372335136.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=170314297.|3=hb_week=201326=1',
+                "Cookie": 'sid=pbZ1CFPWLlYmbxnnAvq4dii6.W7NzIIpXQ%2F%2B3UkE5cHXS6fLos9obtjZDE24SWC%2BtZCo; _hb_chrome_extention=true; _tl0h=1; _hmt=1; __utma=170314297.1433670659.1372335136.1373177582.1373181360.26; __utmb=170314297.1.10.1373181360; __utmc=170314297; __utmz=170314297.1372335136.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=170314297.|2=md=right2=1,3=hb_week=201327=1',
                 'Host': 'huaban.com',
                 'Referer': 'http://huaban.com' + uri,
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
@@ -78,7 +78,11 @@ function run(count, uri, dir, filterName, callback) {
             }
         });
     });
-    req.on('error', function(e) { console.log(e.message); })
+    req.on('error', function(e) {
+        console.error(e.message);
+        console.log('Continue run:');
+        run(count, uri, dir, filterName, callback);
+    });
     req.end();
 }
 
@@ -113,7 +117,7 @@ function forBoards(dirname) {
         var file = getFile();
         console.log(file);
         if (file) {
-            var json = require('./' + path.join(DIR, file));
+            var json = require(path.resolve(DIR, file));
             if (!json || !json.boards || !json.boards.length) {
                 console.log('Ignore Empty FIle:', path.join(DIR, file));
                 readBoards();
